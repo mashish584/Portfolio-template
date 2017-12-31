@@ -1,0 +1,19 @@
+//-----------------------------------------------------
+//All SASS styles imports with complete configurations
+//-----------------------------------------------------
+
+
+//Importing all the SASS styles configuration from "Utilities"
+    @import "utilities/index";
+
+//Importing all the "base" SASS styles for the layout
+    @import "base/index";
+
+//Importing all "layouts" SASS styles
+    @import "layout/index";
+
+//Importing all "modules" SASS styles
+    @import "modules/index";
+
+//Importing all "states" SASS styles
+    @import "states/index";

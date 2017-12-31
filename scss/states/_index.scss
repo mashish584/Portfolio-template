@@ -1,0 +1,47 @@
+
+//hover skills item
+.skills{
+    @include el(item){
+        span{
+            &:hover{
+                background-color: $secondary-bg--color;
+                color:$white;
+                transform:scale(0.9);
+                @media(max-width:$viewport--md){
+                    @include bgGrad(
+                    getMapValue($themes,purpink,shade-one),
+                    getMapValue($themes,purpink,shade-two));
+                }
+             }
+        }
+    }
+}
+
+//portfolio card hover
+.user{
+    @include el(portfolio){
+        @include mod(card){
+            a:hover{
+                background-color: darken($secondary-bg--color,5%);
+            }
+            &:hover .layer{
+                background-color:rgba($black,0.8);
+            }
+            &:hover .content{
+                opacity: 1;
+                padding-top: em(55px);
+                @media(min-width:$viewport--md){
+                    padding-top: em(110px);
+                }
+            }
+        }
+    }
+}
+
+//portfolio modal
+.show{
+    transform: scale(1);
+    opacity: 1;
+}
+
+

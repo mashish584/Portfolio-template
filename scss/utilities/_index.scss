@@ -1,0 +1,185 @@
+
+//----------------------
+//Variables declaration
+//----------------------
+
+    $font-url--google: 'https://fonts.googleapis.com/css?family=Caveat|Cedarville+Cursive|Faster+One|Frijole|Lato:100i|Quicksand|Wendy+One';
+    $font-url--Fawesome: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
+    $font-family : (
+        one: "'Caveat', cursive",
+        two: "'Cedarville Cursive', cursive",
+        three: "'Faster One', cursive",
+        four: "'Frijole', cursive",
+        five: "'Lato', sans-serif",
+        six: "'Wendy One', sans-serif",
+        seven:"'Quicksand', sans-serif"
+    );
+
+    $themes:(
+        purpink : (
+            shade-one: #7F00FF,
+            shade-two : #E100FF
+        )
+    );
+
+    $font-weight : (
+        light:100,
+        med:500,
+        bold:900
+    );
+
+    $white:#fff;
+    $black:#222;
+    $primary-bg--color:$white;
+    $secondary-bg--color:#ff5e62;
+    $font-color:$black;
+
+    $base-font--size:16px;
+    $flex-grid--margin:1%;
+
+    // Viewports Declaration
+    $viewport--xss : 386px;
+    $viewport--xs : 480px;
+    $viewport--sm : 768px;
+    $viewport--md : 992px;
+    $viewport--lg : 1025px;
+
+
+//----------------------
+//Mixins declaration
+//----------------------
+
+    @mixin el($element){
+        &__#{$element}{
+            @content;
+        }
+    }
+    @mixin mod($element){
+        &--#{$element}{
+            @content;
+        }
+    }
+    @mixin child_el($parent,$child){
+        .#{$parent}--#{$child}{
+            margin:em(10px);
+            @content;
+        }
+    }
+    @mixin pseudo($width:0,$height:0){
+        position: absolute;
+        content: '';
+        width: $width;
+        height: $height;
+        @content;
+    }
+
+    @mixin absPos($left:"",$top:"",$right:"",$bottom:""){
+        left: $left;
+        right:$right;
+        bottom: $bottom;
+        top:$top;
+    }
+
+    @mixin flexy($flex-direction:row){
+        display: flex;
+        flex-direction: $flex-direction;
+        flex-wrap: wrap;
+        @content;
+    }
+
+    @mixin alignDiv($width:80%){
+        width: $width;
+        margin-left: auto;
+        margin-right: auto;
+        @media(max-width:$viewport--lg){
+            margin: 0;
+            width: 100%;
+        }
+    }
+
+    @mixin btn-layout(
+        $width:100%,
+        $background:$secondary-bg--color,
+        $px:15px,
+        $py:10px,
+        $rd:25px){
+        width: $width;
+        padding: em($py) em($px);
+        border-radius: em($rd);
+        color:$white;
+        background: $background;
+        text-align: center;
+    }
+
+    @mixin bgGrad($color1,$color2){
+        background: $color1; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, $color1, $color2); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, $color1, $color2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    @mixin circleImg($width:100px,$height:100px,$bWidth:5px){
+        width: $width;
+        height: $height;
+        display: block;
+        border-radius: 50%;
+        border: $bWidth solid darken($white, 0.2);
+    }
+
+//----------------------
+//Function declaration
+//----------------------
+
+    //check font-awesome & google font url exist if 'yes' import both of them
+    @if variable-exists(font-url--google){
+        @import url($font-url--google);
+    }
+    @if variable-exists(font-url--Fawesome){
+        @import url($font-url--Fawesome);
+    }
+
+    //convert 'px' into 'em'
+    @function em($target,$context:$base-font--size){
+        @return ($target/$context) *1em;
+    }
+
+    //flex-basis calculation
+    @function flexWidth($count,$margin:0.5%){
+        @return (100/$count) - ($margin*2);
+    }
+
+    //function to calculate line height
+    @function calcLineHeight($base:$base-font--size){
+        @return ($base*2) - 8px;
+    }
+
+    //function to get nested map value
+    @function getMapValue($pMap,$cMap,$value){
+        @return map-get(map-get($pMap,$cMap),$value);
+    }
+
+
+//--------------------------
+//Placeholders Declaration
+//--------------------------
+
+%mulAbs{
+    position: absolute;
+    @include absPos(0,0,0,0);
+}
+
+%subHeading{
+    font-family: unquote(map-get($font-family,seven));
+    font-weight: map-get($font-weight,bold);
+    @media(max-width:$viewport--md){
+        text-align: center;
+        margin:em(25px) auto;
+        font-family: unquote(map-get($font-family, four));
+    }
+    @media(max-width:$viewport--xs){
+        font-size: em(28px);
+    }
+}
+
+
+

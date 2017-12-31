@@ -1,0 +1,180 @@
+
+// SideBar Layout
+.sidebar{
+    position: fixed;
+    top: 0;
+    width: em(300px);
+    height: 100vh;
+    background: $secondary-bg--color;
+    box-shadow: 7px 0 25px rgba($black,0.3);
+    @media(max-width:$viewport--md){
+        position: relative;
+        width: 100%;
+        height: 700px;
+        overflow: hidden;
+        box-shadow: none;
+        @include bgGrad(
+            getMapValue($themes,purpink,shade-one),
+            getMapValue($themes,purpink,shade-two));
+        &:after{
+            @include pseudo(100%,200px){
+                background-color: $white;
+                bottom: -100px;
+                transform: skewY(-11deg);
+            }
+        }
+    }
+    @include el(user){
+        width: 95%;
+        margin: em(100px) auto;
+        @include mod(image){
+            @include circleImg;
+            margin:0 auto em(25px);
+        }
+        @include mod(details){
+            text-align: center;
+            letter-spacing: 1px;
+            color: $white;
+            @include child_el(details,name){
+                font-family: unquote(map-get($font-family,three));
+                font-weight: map-get($font-weight,light);
+                font-size: em(25px);
+            }
+            @include child_el(details,profession){
+                display: block;
+                font-family: unquote(map-get($font-family,six));
+                font-weight: map-get($font-weight, bold);
+            }
+        }
+
+        @media(max-width:$viewport--md){
+            display: none;
+        }
+    }
+
+    @include el(heading){
+        display: none;
+        text-align: center;
+        img{
+            @include circleImg(200px,200px,7px);
+            margin:em(100px) auto em(35px);
+        }
+        h3{
+            color: $white;
+            letter-spacing: 2px;
+            @media (max-width:$viewport--xs){
+                font-size: em(22px);
+                letter-spacing: 1px;
+            }
+        }
+        @media (max-width:$viewport--md){
+            display: block;
+        }
+    }
+
+}
+
+// Main Content container
+#main-content{
+    margin-left: 300px;
+    padding: em(100px) em(50px) em(10px);
+    @media(max-width:$viewport--lg){
+        padding:0;
+    }
+    @media(max-width:$viewport--md){
+        margin-left: 0;
+    }
+}
+
+//background 'div' layout
+.layout{
+    background:$white;
+    padding:em(30px) em(25px);
+    border: 1px solid darken($white,5%);
+    margin:em(25px) auto;
+    @media(max-width:$viewport--lg){
+        margin: 0;
+        padding:em(35px);
+        border-color: transparent;
+    }
+    @media(max-width:$viewport--md){
+        padding:em(15px);
+    }
+}
+
+
+.user{
+    //user bio section
+    @include el(bio){
+        @include alignDiv(90%);
+        @extend .layout;
+        h1{
+           font-family: unquote(map-get($font-family,two));
+           @media (max-width:$viewport--xs){
+               line-height: calcLineHeight(35px);
+               margin: em(10px) auto;
+           }
+        }
+        //user personal bio details
+        @include mod(detail){
+            font-size: em(18px);
+            font-family: unquote(map-get($font-family,seven));
+            line-height: calcLineHeight(18px);
+            letter-spacing: 1px;
+            color:lighten($black,10%);
+            font-style: italic;
+        }
+        //user skills section
+        @include mod(skills){
+            h2{
+                font-family: unquote(map-get($font-family,seven));
+                font-size: em(24px);
+                color: #a9a9a9;
+                letter-spacing: 2px;
+                @media(max-width:$viewport--md){
+                    letter-spacing: 1px;
+                    font-size: em(20px);
+                }
+            }
+        }
+    }
+
+    //user portfolio section
+    @include el(portfolio){
+        @include alignDiv(90%);
+        @extend .layout;
+        h2{
+            @extend %subHeading;
+            margin-left: $flex-grid--margin*2;
+            @media(max-width:$viewport--lg){
+                margin-left:0;
+            }
+        }
+        .container{
+            @include flexy;
+            margin-top: em(25px);
+        }
+    }
+
+    //user education section
+    @include el(education){
+        @include alignDiv(90%);
+        @extend .layout;
+        h2{
+           @extend %subHeading;
+        }
+        .container{
+            margin-top: em(55px);
+        }
+    }
+
+    //user contact section
+    @include el(contact){
+        @include alignDiv(90%);
+        @extend .layout;
+        h2{
+            @extend %subHeading;
+        }
+    }
+}
+
